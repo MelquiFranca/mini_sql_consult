@@ -1,0 +1,28 @@
+{
+  "name": "mini_sql_consult",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.3.0",
+    "electron": "^11.2.3",
+    "knex": "^0.21.17",
+    "mysql": "^2.18.1",
+    "pg": "^8.5.1",
+    "sqlite3": "^5.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start:node": "node src/",
+    "start": "electron src/."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
