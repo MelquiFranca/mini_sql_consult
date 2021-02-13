@@ -4,10 +4,187 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="scripts.js"></script>
     </head>
-    <body>
-    
+    <body id="body">
+        <section id="conexoes" class="conexoes">
+            <div class="header_bloco">
+                <i class="fa fa-server"></i>
+                CONEXÕES
+            </div>
+            <div class="databases">
+                <i class="fa fa-database"></i>
+            </div>
+            <div class="acoes_conexoes">
+                <div class="botoes_conexoes">
+                    <button>Criar nova conexão</button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="atividades" class="atividades">
+            <div id="consultas" class="consultas">
+                <div class="header_bloco">SCRIPTS SQL</div>
+                <textarea name="txtSql" id="txtSql" class="txtSql" cols="30" rows="10"></textarea>
+            </div>
+            <div id="resultados" class="resultados">
+                <div class="header_bloco">RESULTADOS</div>
+                <div class="gridResultado" id="gridResultado">
+                    <table>
+                        <thead class="headResultado" id="headResultado">
+                            <tr>
+                                <th>Id</th>
+                                <th>Campo 1</th>
+                                <th>Campo 2</th>
+                                <th>Campo 3</th>
+                                <th>Campo 4</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bodyResultado" id="bodyResultado">                                                       
+                                                     
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Valor 1</td>
+                                <td>Valor 2</td>
+                                <td>Valor 3</td>
+                                <td>Valor 4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </table>
+            </div>
+        </section>
+
+        <section id="acoes" class="acoes">
+            <div class="header_bloco">AÇÕES</div>
+            <div class="botoes">
+                <button class="botao">
+                    <div class="icon estilo_icon_tipo_primario">I</div>
+                    <div class="descricao">Executar QUERY</div>
+                </button>
+                <button class="botao">
+                    <div class="icon estilo_icon_tipo_secundario">E</div>
+                    <div class="descricao">Limpar</div>
+                </button>
+                <button class="botao">
+                    <div class="icon estilo_icon_tipo_terciario">E</div>
+                    <div class="descricao">Criar</div>
+                </button>
+            </div>
+        </section>
     </body>
 </html>

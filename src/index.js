@@ -1,4 +1,4 @@
 const { BrowserView, app } = require('electron')
-const Connection = require('./classes/Connection')
+const Database = require('./classes/Database')
 
-const connection = new Connection({name: 'dev03', host: 'C:\\Android\\database.sql'})
+const database = new Database({name: 'dev03', host: 'C:\\ProjetosProgramacao\\database.sql'})

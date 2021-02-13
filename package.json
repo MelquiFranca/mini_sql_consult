@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "chai": "^4.3.0",
-    "electron": "^11.2.3",
     "knex": "^0.21.17",
     "mysql": "^2.18.1",
     "pg": "^8.5.1",
     "sqlite3": "^5.0.1"
   },
   "devDependencies": {
+    "electron": "^11.2.3",
     "mocha": "^8.2.1"
   },
   "scripts": {

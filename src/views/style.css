@@ -1,0 +1,165 @@
+/* TAGS HTML */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+div, tr, td, th {
+    display: flex;
+}
+
+td, th {    
+    flex: 1;
+    width: 100%;    
+    align-items: center;
+    justify-content: center;
+}
+
+/* SELETORES */
+#body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background: #222;
+    color: #FFF;
+    padding: 5px;
+}
+.conexoes {
+    flex: 1;
+    background: #333;
+}
+.conexoes .databases {
+    flex: 1;
+}
+.conexoes .acoes_conexoes {
+    border: 1px solid red;
+}
+.atividades {
+    flex: 5;
+    /* overflow: auto; */
+    /* margin: 0 5px; */
+}
+.acoes {
+    flex: 1;
+}
+.acoes .botoes {
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.botao {
+    flex: 1;
+    width: 100%;
+    font-size: 12px;
+    height: 25px;
+    margin: 5px 0;
+    margin-left: 6px;
+    border: none;
+    border-radius: 0;    
+    transform: skew(-20deg);
+    display: flex;
+    align-items: center;    
+}
+.botao .icon {
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.botao .descricao {
+    flex: 4;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    color: #FFF;
+}
+
+.estilo_icon_tipo_primario {
+    background: green;
+    color: #FFF;
+}
+.estilo_icon_tipo_secundario {
+    background: red;
+    color: #FFF;
+}
+.estilo_icon_tipo_terciario {
+    background: blue;
+    color: #FFF;
+}
+.conexoes, .atividades, .acoes {
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+}
+.consultas, .resultados {   
+    /* border: 1px solid black; */
+    flex-direction: column;
+    flex: 1;
+}
+
+.header_bloco {
+    align-items: center;
+    padding: 4px;
+    font-size: 12px;
+    color: #CCC;
+    background: #555;
+    margin: 5px 0;
+}
+.header_bloco i {
+    margin-right: 6px;
+}
+
+.txtSql {
+    flex: 1;
+    background: #333;
+    border-radius: 0;
+    color: #FFF;
+    padding: 10px;
+    resize: none;
+}
+
+.gridResultado {
+    overflow: auto!important;
+    font-size: 14px;
+}
+.gridResultado, table {
+    flex: 1;
+}
+.headResultado {
+    color: #DDD;
+    background: #444;    
+}
+.headResultado th {
+    padding: 2px;
+}
+
+.bodyResultado {
+    color: #BBB;
+}
+.bodyResultado td {
+    border: 1px solid #333;
+}
+
+/* 
+RESPONSIVIDADE
+*/
+
+@media screen and (max-width: 900px) {
+    #body {
+        flex-direction: column;
+    }
+    .atividades {
+        flex: 8;
+        padding: 5px 0;
+    } 
+    /* .consultas {
+        flex: 2;
+    } */
+    .acoes .botoes {
+        flex-direction: row;
+    }
+    .botao {
+        width: 180px;
+    }
+}

@@ -2,7 +2,7 @@ const Knex = require('knex')
 const path = require('path')
 const fs = require('fs')
 // const crypto = require('crypto')
-class Connection {
+class Database {
     #name
     #host
     #user
@@ -41,4 +41,4 @@ class Connection {
     }
 }
 
-module.exports = Connection
+module.exports = Database
