@@ -1,16 +1,19 @@
 const DataBaseService = require("./DataBaseService")
 
 class IPCService {
-    executarQuery(event, data) {
-        console.log(data)
+    executarQuery = async (event, data) => {
+        const { base, sql } = data
+        const database = DataBaseService.getBaseId(base)
+        console.log(database)
+        const retorno = await DataBaseService.getConsulta(database, sql)
+        return retorno
     }
-    async carregarDadosIniciais(event, data, database) {
-        DataBaseService.criarDataBaseLocal()    
-        const dadosBases = await DataBaseService.getNomeDataBasesConfiguradas(database)
-        const bases = await DataBaseService.criaDatabasesConfiguradas(dadosBases)
-        console.log(bases)
+    carregarDadosIniciais = async (event, data, database) => {   
+        const dadosBases = await DataBaseService.getDadosDataBasesConfiguradas(database)
+        DataBaseService.basesConectadas = dadosBases
+        
         event.reply('CarregandoDados', {
-            bases
+            bases: dadosBases
         })        
     }
 }

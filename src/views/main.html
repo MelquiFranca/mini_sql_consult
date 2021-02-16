@@ -7,26 +7,28 @@
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link href="css/style.css" rel="stylesheet">        
     </head>
-    <body id="body">
+    <body id="body" class="body">
         <section id="conexoes" class="conexoes">
             <div class="header_bloco">
                 <i class="fa fa-sitemap"></i>
                 CONEXÕES
             </div>
             <div class="conexoes_body">
-                <div class="databases">
-                    <i class="fa fa-database"></i>
+                <div class="databases" id="databases">
+                    <!-- <i class="fa fa-database"></i> -->
+                    <!-- <ul name="basesConfiguradas" id="basesConfiguradas" class="basesConfiguradas">
+                    </ul> -->
                 </div>
                 <div class="acoes_conexoes">
-                <div class="botoes_conexoes">
-                    <button class="botao" id="novaConexao">
-                        <div class="icon estilo_icon_tipo_yellow">
-                            <i class="fa fa-plus"></i>
-                        </div>
-                        <div class="descricao">Criar nova conexão</div>
-                    </button>
+                    <div class="botoes_conexoes">
+                        <button class="botao" id="novaConexao">
+                            <div class="icon estilo_icon_tipo_yellow">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="descricao">Criar nova conexão</div>
+                        </button>
+                    </div>
                 </div>
-            </div>
             </div>
         </section>
         
@@ -43,9 +45,6 @@
                 <div class="gridResultado" id="gridResultado">
                     <table id="tabelaResultados">
                         <tbody class="bodyResultado" id="bodyResultado">
-                            <tr>
-                                <td>Nenhum registro encontrado</td>
-                            </tr>                                                                                               
                         </tbody>
                     </table>
                 </div>
@@ -79,6 +78,6 @@
                 </button> -->
             </div>
         </section>
-        <script src="scripts.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>

@@ -5,7 +5,7 @@
     margin: 0;
     box-sizing: border-box;
 }
-div, tr, td, th {
+div, tr, td, th, ul, li {
     display: flex;
 }
 button {
@@ -22,13 +22,14 @@ td, th {
 }
 
 /* SELETORES */
-#body {
+.body {
     display: flex;
     width: 100vw;
     height: 100vh;
     background: #222;
     color: #FFF;
-    /* padding: 5px; */
+}
+#body {
     overflow: hidden;
 }
 .conexoes {
@@ -41,6 +42,30 @@ td, th {
 }
 .conexoes .databases {
     flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* border: 1px solid black; */
+}
+.conexoes .databases li {
+    flex-direction: row;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: flex-start;
+}
+.conexoes .databases li .icon_radio {
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+li .icon_radio input {
+    margin: 0 5px;
+}
+.conexoes .databases li .nome_base {
+    flex: 5;
+    font-size: 12px;
+    justify-content: flex-start;
+    padding: 0 5px;
 }
 .conexoes .acoes_conexoes {
     align-items: flex-end;
@@ -178,6 +203,50 @@ td, th {
 }
 
 /* 
+FORMULARIO NOVA CONEXAO
+*/
+#body_nova_conexao {
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.formulario {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;  
+    padding: 10px;  
+    align-self: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.formulario .form_group {
+    
+    width: 100%;
+    padding: 5px;    
+    align-items: center;
+    justify-content: space-between;
+}
+.form_group .form_label {
+    margin: 0 5px;
+    flex: 1;
+}
+.form_group .form_input {
+    flex: 2;
+    background: #333;
+    border-radius: 0;
+    color: #FFF;
+    border: none;
+    padding: 5px;
+}
+.formulario .botoes {
+    width: 90%;
+}
+/* 
 RESPONSIVIDADE
 */
 
@@ -218,5 +287,8 @@ RESPONSIVIDADE
     }
     .botoes_conexoes .botao .icon {
         flex: 1;
+    }
+    .conexoes .databases li .nome_base {
+        flex: 10;
     }
 }
