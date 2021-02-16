@@ -2,25 +2,29 @@
   "name": "mini_sql_consult",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
     "chai": "^4.3.0",
-    "knex": "^0.21.17",
+    "electron-prebuilt": "^1.4.13",
+    "electron-rebuild": "^2.3.5",
     "mysql": "^2.18.1",
     "pg": "^8.5.1",
-    "sqlite3": "^5.0.1"
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "electron": "^11.2.3",
+    "electron-builder": "^22.9.1",
     "mocha": "^8.2.1"
   },
   "scripts": {
     "test": "mocha",
-    "start:node": "node src/",
-    "start": "electron src/."
+    "start:node": "node src/main.js",
+    "start": "electron src/.",
+    "postinstall": "install-app-deps"
   },
   "keywords": [],
   "author": "",
