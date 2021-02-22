@@ -27,7 +27,7 @@ app.on('activate',() => {
  */
 const ipcService = new IPCService()
 ipcMain.handle('ExecutarQuery', ipcService.executarQuery)
-ipcMain.on('Inicializacao', (event, data) => ipcService.carregarDadosIniciais(event, data, dataBaseLocal))
-
+ipcMain.on('Inicializacao', (evento, data) => ipcService.carregarDadosIniciais(evento, data, dataBaseLocal))
+ipcMain.handle('CriarConexao', (evento, data) => ipcService.criarConexao(evento, data))
 // const bases = DataBaseService.getDadosDataBasesConfiguradas(dataBaseLocal)
 // const dataBasesConfiguradas = DataBaseService.criaDatabasesConfiguradas(bases)

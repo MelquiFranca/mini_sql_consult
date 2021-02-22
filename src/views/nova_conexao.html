@@ -18,6 +18,18 @@
         <form class="formulario">
             <div class="form_group">
                 <label for="" class="form_label">
+                    Tipo de Banco:
+                </label>
+                <select name="" id="" class="form_input">
+                    <option value="">Selecione...</option>
+                    <option value="sqlite">SQLite</option>
+                    <option value="mysql">MySQL</option>
+                    <option value="postgres">Postgres</option>
+                    <option value="mssql">SQL Server</option>
+                </select>
+            </div>
+            <div class="form_group">
+                <label for="" class="form_label">
                     Nome da Base:
                 </label>
                 <input 
@@ -30,6 +42,17 @@
             <div class="form_group">
                 <label for="" class="form_label">
                     Endereço do Host:
+                </label>
+                <input 
+                    type="text" 
+                    name="" 
+                    id="" 
+                    class="form_input"
+                />
+            </div>
+            <div class="form_group">
+                <label for="" class="form_label">
+                    Database:
                 </label>
                 <input 
                     type="text" 
@@ -65,7 +88,7 @@
                     Senha de Acesso:
                 </label>
                 <input 
-                    type="password" 
+                    type="text" 
                     name="" 
                     id="" 
                     class="form_input"

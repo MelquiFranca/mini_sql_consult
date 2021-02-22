@@ -17,7 +17,7 @@ button:active {
 td, th {    
     flex: 1;
     width: 100%;    
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
 }
 
@@ -33,26 +33,62 @@ td, th {
     overflow: hidden;
 }
 .conexoes {
-    flex: 1;
+    flex: 2;
+    /* width: 250px; */
     background: #333;
 }
 .conexoes_body {
     flex: 1;
     flex-direction: column;
+    overflow: hidden;
 }
 .conexoes .databases {
-    flex: 1;
+    flex: 10;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-start; 
+    height: 100%;
+    overflow: auto;
     /* border: 1px solid black; */
 }
-.conexoes .databases li {
-    flex-direction: row;
-    padding: 10px 0;
-    align-items: center;
-    justify-content: flex-start;
+.databases .basesConfiguradas {
+    flex-direction: column;
 }
-.conexoes .databases li .icon_radio {
+.conexoes .databases .basesConfiguradas>li {
+    flex-direction: column;
+    padding-top: 10px;
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom: 1px solid #5555;
+}
+li .cabecalho {
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+li .lista_tabelas {
+    flex-direction: column;
+    flex: 1;
+    background: #333;
+    width: 100%;
+    margin-top: 5px;
+    padding: 5px 0;
+    font-size: 13px;
+}
+.lista_tabelas .tabela {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin: 1px 0;
+    padding: 5px;
+    padding-left: 40px;
+    width: 100%;    
+}
+.lista_tabelas .tabela i {
+    margin: 0 5px;
+}
+.conexoes .databases .basesConfiguradas>li .icon_radio {
     flex: 1;
     flex-direction: row;
     justify-content: flex-start;
@@ -61,13 +97,17 @@ td, th {
 li .icon_radio input {
     margin: 0 5px;
 }
+.base_selecionada {
+    background: #5555;
+}
 .conexoes .databases li .nome_base {
     flex: 5;
-    font-size: 12px;
+    font-size: 11px;
     justify-content: flex-start;
     padding: 0 5px;
 }
 .conexoes .acoes_conexoes {
+    flex: 1;
     align-items: flex-end;
     justify-content: center;
     padding: 8px;
@@ -85,11 +125,14 @@ li .icon_radio input {
 }
 
 .atividades {
-    flex: 5;    
+    display: flex;
+    flex: 7;
+    width: 100%;
+    overflow: hidden;
     /* margin: 0 5px; */
 }
 .acoes {
-    flex: 1;
+    flex: 2;
     /* justify-content: flex-end; */
 }
 .acoes .botoes {
@@ -150,14 +193,20 @@ li .icon_radio input {
 .conexoes, .atividades, .acoes {
     padding: 0 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
 }
 .consultas, .resultados {   
     /* border: 1px solid black; */
     flex-direction: column;
+    overflow: hidden;
     flex: 1;
 }
-
+.resultados .header_bloco .countResultado {
+    flex: 1;
+    justify-self: flex-end;
+    justify-content: flex-end;
+    padding: 0 10px;
+}
 .header_bloco {
     align-items: center;
     padding: 6px;
@@ -168,6 +217,7 @@ li .icon_radio input {
 }
 .header_bloco i {
     margin-right: 6px;
+    font-size: 15px;
 }
 
 .txtSql {
@@ -179,27 +229,37 @@ li .icon_radio input {
     /* resize: none; */
 }
 
-.gridResultado {
-    overflow: auto;
+.gridResultado {   
+    flex: 1;
+    padding: 5px;
     font-size: 14px;
     background: #333;
+    overflow: auto;    
 }
-.gridResultado, table {
+.gridResultado table {
     flex: 1;
+    /* display: flex; */
+    flex-direction: column;
 }
 .headResultado {
     color: #DDD;
-    background: #444;    
+    background: #444;
+    overflow: hidden;
 }
 .headResultado td {
-    padding: 2px;
+    flex: 1;
+    padding: 4px;    
 }
 
 .bodyResultado {
     color: #BBB;
+    /* width: 100%; */
+    overflow: hidden;
 }
 .bodyResultado td {
     border: 1px solid #444;
+    white-space:nowrap;
+    padding: 4px;
 }
 
 /* 
@@ -223,6 +283,7 @@ FORMULARIO NOVA CONEXAO
     align-self: center;
     justify-content: space-evenly;
     align-items: center;
+    background: #333;
 }
 .formulario .form_group {
     
@@ -237,14 +298,34 @@ FORMULARIO NOVA CONEXAO
 }
 .form_group .form_input {
     flex: 2;
-    background: #333;
+    background: #444;
     border-radius: 0;
     color: #FFF;
     border: none;
     padding: 5px;
 }
 .formulario .botoes {
-    width: 90%;
+    width: 90%;    
+}
+.formulario .botoes .botao .descricao {
+    background: #444;
+}
+option:hover {
+    background: #333;
+}
+/* 
+ESTILIZAÇÃO BARRA SCROLL
+*/
+::-webkit-scrollbar-track {
+    background-color: #222;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #444;
+}
+::-webkit-scrollbar-thumb {
+    background: #555;
 }
 /* 
 RESPONSIVIDADE
@@ -258,6 +339,9 @@ RESPONSIVIDADE
         flex: 8;
         padding: 5px 0;
     }     
+    .acoes {
+        flex: 1;
+    }
     .acoes .botoes {
         flex-direction: row;
         justify-content: space-around;
@@ -272,8 +356,17 @@ RESPONSIVIDADE
     .botao .descricao {
         flex: 5;
     }
+    .conexoes {
+        flex: 1;
+        width: 100%;
+    }
     .conexoes .conexoes_body {
         flex-direction: row;
+        position: relative;
+        overflow: visible;
+    }
+    .conexoes_body {
+        justify-content: flex-end;
     }
     .conexoes_body .acoes_conexoes {
         align-items: flex-start;
@@ -288,7 +381,36 @@ RESPONSIVIDADE
     .botoes_conexoes .botao .icon {
         flex: 1;
     }
+    .conexoes .databases .basesConfiguradas {
+        overflow: hidden;
+        max-height: 40px;
+    }
+    .conexoes .databases .basesConfiguradas:hover {
+        z-index: 15;
+        position: absolute;
+        left: 0;
+        padding: 10px 0;
+        padding-bottom: 0;
+        /* height: 200px; */
+        max-height: 500px;
+        width: 100%;
+        overflow: auto;
+        background: #2F2F2F;
+        box-shadow: 0px 4px 3px 1px #444;
+    }
     .conexoes .databases li .nome_base {
         flex: 10;
+    }
+    li .cabecalho {
+        justify-content: center;
+        padding-bottom: 0;
+    }
+    .conexoes .databases .basesConfiguradas>li {
+        /* border-bottom: none; */
+        align-items: flex-start;
+        padding: 12px 0;
+    }
+    .databases .basesConfiguradas li .lista_tabelas {
+        display: none;
     }
 }

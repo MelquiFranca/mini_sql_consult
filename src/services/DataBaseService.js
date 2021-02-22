@@ -32,7 +32,20 @@ class DataBaseService {
     }
     static getDadosDataBasesConfiguradas = async({ db }) => {
         const result = await db.query(`SELECT * FROM Bases;`)
-        return result[0]
+        const promiseTabelas = result[0].map(async(base, indice) => {
+            return await this.getTabelasBase(base)
+     
+        })
+
+        const tabelas = await Promise.all(promiseTabelas)
+
+        const dadosBases = result[0].map((base, indice) => {
+            base.tabelas = tabelas[indice]
+            return base
+        })
+        
+        console.log(dadosBases)
+        return dadosBases
     }
     static getConsulta = async ({ db }, sql) => {
         const result = await db.query(sql)
@@ -45,9 +58,17 @@ class DataBaseService {
     static set basesConectadas(dadosBases) {
         this.#basesConectadas = dadosBases
     }
+    static getTabelasBase = async (base) => {
+        const { db } = new DataBase({ ...base })
+        const schemas = await db.showAllSchemas()
+        const tabelas = schemas.map(objeto => {
+            const [ tabela ] = Object.entries(objeto)            
+            return tabela[1]
+        })
+        return tabelas
+    }
     static getBaseId(id) {
         const base = this.#basesConectadas.filter(base => base.id == id)[0]
-        console.log(base)
         return new DataBase({ ...base })
     }
 }

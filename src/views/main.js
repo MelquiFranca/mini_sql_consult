@@ -8,11 +8,8 @@ const txtSQL = document.getElementById('txtSql')
 const tabelaResultados = document.getElementById('tabelaResultados')
 const listaBasesConfiguradas = document.getElementById('databases')
 
-// let listaBasesConectadas = []
-
 ipcRenderer.sendSync('Inicializacao', {})
 ipcRenderer.once('CarregandoDados', (event, { bases }) => {
-    // listaBasesConectadas = bases
     preencheListaBasesConfiguradas(bases)
 })
 
@@ -50,9 +47,39 @@ const handleClickCancelar = (e) => {
 }
 const handleClickNovaConexao = (e) => {
     e.preventDefault()
-    alert('Nova Conexão')
+    ipcRenderer.invoke('CriarConexao', {})
 }
+const handleChangeTextoSQL = (e) => {
+    formataPalavraChaveSQL(e.target)
+}
+const handleChangeBases = (e) => {
+    const listaBasesRadio = document.getElementsByName('listaBases')
+    Array.from(listaBasesRadio).map(e => {
+        const li = e.parentNode.parentNode.parentNode
+        e.checked ? 
+            li.classList.add('base_selecionada') : 
+            li.classList.remove('base_selecionada')
+    })
+}
+const ARRAY_PALAVRAS_CHAVE = [
+    'select', 'from', 'where',
+    'limit','order', 'by', 'group', 
+    'on', 'join', 'inner', 
+    'left', 'right','desc',
+    'asc', 'distinct', 'count'
+]
 
+const formataPalavraChaveSQL = (element) => {        
+    ARRAY_PALAVRAS_CHAVE.map(palavra => {
+        const textRegex = `(\\W)${palavra}(\\W)|^${palavra}(\\W)`;
+        const regex = new RegExp(textRegex, 'gi');
+        
+        if(element.value.search(regex) >= 0) {
+            const texto = txtSQL.value.match(regex)[0]
+            txtSQL.value = element.value.replaceAll(regex, texto.toUpperCase())
+        }
+    })
+}
 /**
  * Funções
  */
@@ -64,10 +91,17 @@ const limparTabela = () => {
     const linhasAtuais = tabelaResultados.rows
     Array.from(linhasAtuais).map(e => tabelaResultados.deleteRow(0))
 }
+const exibeCountRegistros = (registros) => {
+    const contadorResultados = document.getElementById('countResultado')
+    contadorResultados.innerText = `Registros encontrados: ${registros}`
+}
 const preencherTabela = ({ colunas, valores }) => {   
     
     const head = tabelaResultados.createTHead()
     const body = tabelaResultados.tBodies[0]
+    
+    exibeCountRegistros(valores.length)
+
     head.classList.add('headResultado')
 
     const linha = head.insertRow()
@@ -87,32 +121,83 @@ const preencherTabela = ({ colunas, valores }) => {
         })
     })
 }
-const preencheListaBasesConfiguradas = (bases) => {
-    bases.map(base => {
+const preencheListaBasesConfiguradas = (bases) => {     
+    if(bases.length) {
+        const ul = document.createElement('ul')   
+        ul.classList.add('basesConfiguradas')
+        ul.name = 'basesConfiguradas'
+        ul.id = 'basesConfiguradas'
+
+        bases.map((base, indice) => {
+            const li = document.createElement('li')
+            const radio = document.createElement('input')
+            const icon = document.createElement('i')
+            const divCabecalho = document.createElement('div')
+            const divIconRadio = document.createElement('div')
+            const divTexto = document.createElement('div')
+            
+            radio.type = 'radio'
+            radio.id = `listaBases_${indice}`
+            radio.name = 'listaBases'
+            radio.classList.add('listaBases')
+            radio.value = base.id
+            radio.addEventListener('change', handleChangeBases)
+    
+            icon.classList.add('fa')
+            icon.classList.add('fa-database')
+            divCabecalho.classList.add('cabecalho')
+            divIconRadio.classList.add('icon_radio')
+            divTexto.classList.add('nome_base')
+    
+            divTexto.innerText = `${base.dialect.toUpperCase()} - ${base.name.toLowerCase()}`,
+            
+            divIconRadio.appendChild(radio)
+            divIconRadio.appendChild(icon)
+            divCabecalho.appendChild(divIconRadio)
+            divCabecalho.appendChild(divTexto)
+            li.appendChild(divCabecalho)
+            ul.appendChild(li)
+    
+            if(base.tabelas) {
+                preencheTabelasBase(li, base.tabelas)
+            }
+    
+        })
+
+        listaBasesConfiguradas.appendChild(ul)
+    } else {
+        const divSemConteudo = document.createElement('div')
+        divSemConteudo.innerText = 'Nenhuma base registrada.'
+        divSemConteudo.classList.add('nome_base')
+        listaBasesConfiguradas.appendChild(divSemConteudo)
+    }
+
+    
+}
+const preencheTabelasBase = (base, tabelas) => {
+    if(!tabelas.length)
+        return
+
+    const ul = document.createElement('ul')
+    ul.classList.add('lista_tabelas')
+
+    tabelas.map(tabela => {
         const li = document.createElement('li')
-        const radio = document.createElement('input')
         const icon = document.createElement('i')
-        const divIconRadio = document.createElement('div')
-        const divTexto = document.createElement('div')
-        
-        radio.type = 'radio'
-        radio.name = 'listaBases'
-        radio.classList.add('listaBases')
-        radio.value = base.id
+        const divNome = document.createElement('div')
 
+        li.classList.add('tabela')
         icon.classList.add('fa')
-        icon.classList.add('fa-database')
-        divIconRadio.classList.add('icon_radio')
-        divTexto.classList.add('nome_base')
+        icon.classList.add('fa-table')
 
-        divTexto.innerText = base.name,
-        
-        listaBasesConfiguradas.appendChild(li)
-        divIconRadio.appendChild(radio)
-        divIconRadio.appendChild(icon)
-        li.appendChild(divIconRadio)
-        li.appendChild(divTexto)
+        divNome.innerText = tabela
+
+        li.appendChild(icon)
+        li.appendChild(divNome)
+        ul.appendChild(li)
     })
+
+    base.appendChild(ul)
 }
 /** 
  * Adicionando Eventos
@@ -121,3 +206,22 @@ btnExecutar.addEventListener('click', handleClickExecutar)
 btnUltimaConsulta.addEventListener('click', handleClickUltimaConsulta)
 btnCancelar.addEventListener('click', handleClickCancelar)
 btnNovaConexao.addEventListener('click', handleClickNovaConexao)
+txtSQL.addEventListener('keyup', handleChangeTextoSQL)
+
+
+// const basesTESTE = [
+//     {
+//         name: 'Database 1',
+//         tabelas: [
+//             'campeonatos',
+//             'jogadores',
+//             'times',
+//             'tecnicos'
+//         ]
+//     },
+//     {
+//         name: 'Database 2',
+//         tabelas: ['filmes']
+//     },
+// ]
+// preencheListaBasesConfiguradas(basesTESTE, handleChangeBases)

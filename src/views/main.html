@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
@@ -14,9 +13,28 @@
                 CONEXÕES
             </div>
             <div class="conexoes_body">
-                <div class="databases" id="databases">
-                    <!-- <i class="fa fa-database"></i> -->
+                <div class="databases" id="databases">                   
                     <!-- <ul name="basesConfiguradas" id="basesConfiguradas" class="basesConfiguradas">
+                        <li class="base_selecionada">
+                            <div class="cabecalho">
+                                <div class="icon_radio">
+                                    <input type="radio" name="" id="">
+                                    <i class="fa fa-database"></i>
+                                </div>
+                                <div class="nome_base">ECidade_Niteroi_20210219</div>
+                            </div>
+                            <ul class="lista_tabelas">
+                                <li class="tabela">
+                                    <i class="fa fa-table"></i>
+                                    <div>Tabela</div>
+                                </li>
+                                <li class="tabela">
+                                    <i class="fa fa-table"></i>
+                                    Tabela
+                                </li>
+                            </ul>
+                        </li>
+                        
                     </ul> -->
                 </div>
                 <div class="acoes_conexoes">
@@ -41,7 +59,11 @@
                 <textarea name="txtSql" id="txtSql" class="txtSql" cols="30" rows="10" placeholder="Insira aqui seu SCRIPT SQL..."></textarea>
             </div>
             <div id="resultados" class="resultados">
-                <div class="header_bloco">RESULTADOS</div>
+                <div class="header_bloco">
+                    <i class="fa fa-desktop"></i>                    
+                    RESULTADOS
+                    <div class="countResultado" id="countResultado"></div>
+                </div>
                 <div class="gridResultado" id="gridResultado">
                     <table id="tabelaResultados">
                         <tbody class="bodyResultado" id="bodyResultado">
@@ -50,9 +72,12 @@
                 </div>
             </div>
         </section>
-
+        
         <section id="acoes" class="acoes">
-            <div class="header_bloco">AÇÕES</div>
+            <div class="header_bloco">
+                <i class="fa fa-bolt"></i>                    
+                AÇÕES
+            </div>
             <div class="botoes">
                 <button class="botao" id="executar">
                     <div class="icon estilo_icon_tipo_green">

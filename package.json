@@ -20,6 +20,9 @@
     "electron-builder": "^22.9.1",
     "mocha": "^8.2.1"
   },
+  "win": {
+    "icon": "src/views/images/icone.png"
+  },
   "scripts": {
     "test": "mocha",
     "start:node": "node src/main.js",

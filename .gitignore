@@ -4,3 +4,5 @@ tarefas.md
 build
 *.sqlite
 *.sql
+!/src/views/images/icone.png
+/src/views/images/
