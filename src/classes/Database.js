@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize')
 const path = require('path')
 const fs = require('fs')
-// const crypto = require('crypto')
+
 
 class DataBase {
     #id
@@ -25,22 +25,33 @@ class DataBase {
         this.#password = password
         this.#db
         
-        if(dialect == 'sqlite') {
-            if(fs.existsSync(path.join(path.resolve(host))) || create) {
-                const newConnection = new Sequelize({
-                    dialect,
-                    storage: path.join(host)
-                  })
-                this.#db = newConnection
-            }            
+        try {
 
-        } else {
-            const newConnection = new Sequelize(database, user, password, { 
-                host: host, 
-                dialect
-            })     
-            this.#db = newConnection
-        }   
+            if(dialect == 'sqlite') {
+                
+                if(fs.existsSync(path.join(path.resolve(host))) || create) {
+                    
+                    const newConnection = new Sequelize({
+                        dialect,
+                        storage: path.join(host)
+                      })
+                    this.#db = newConnection
+                } 
+    
+            } else {
+                const newConnection = new Sequelize(database, user, password, { 
+                    host: host, 
+                    dialect
+                })     
+                this.#db = newConnection
+            }   
+        } catch(error) {
+            console.error("DataBaseService.getTabelasBase(): ", error.message)
+            return {
+                error: true,
+                mensagemErro: error.message
+            }
+        }
     }    
     get id () {
         return this.#id

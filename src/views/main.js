@@ -33,6 +33,11 @@ const handleClickExecutar = async (e) => {
         sql: txtSQL.value
     })
     
+    if(retorno.error) {
+        limparTabela()
+        exibeMensagemErro(retorno)   
+        return
+    }
     const colunas = Object.keys(retorno[0])
     preencherTabela({ colunas, valores: retorno })
 
@@ -61,6 +66,38 @@ const handleChangeBases = (e) => {
             li.classList.remove('base_selecionada')
     })
 }
+const handleClickListaTabelas = ({target}) => {    
+    const ul = target.parentNode.parentNode.parentNode.querySelector('.lista_tabelas')
+
+    if(ul.classList && ul.classList.contains('lista_tabelas_oculta')) {
+        target.classList.remove('fa-eye-slash')
+        target.classList.add('fa-eye')
+        ul.classList.remove('lista_tabelas_oculta')
+    } else if(ul.classList) {
+        target.classList.add('fa-eye-slash')
+        target.classList.remove('fa-eye')
+        ul.classList.add('lista_tabelas_oculta')
+    }
+}
+const handleSelectBase = ({target}) => {    
+    const radio = target.querySelector('.listaBases') ? 
+    target.querySelector('.listaBases') : 
+        (target.parentNode.querySelector('.listaBases') ? 
+        target.parentNode.querySelector('.listaBases') : 
+        target.parentNode.parentNode.querySelector('.listaBases') )
+    
+    if(radio && radio.classList.contains('listaBases') && !radio.checked)  {
+        radio.checked = true
+        handleChangeBases()
+    }
+}
+const handleDoubleClickTabela = (e) => {
+    e.stopPropagation()
+    handleSelectBase(e.target.parentNode)
+    const tabela = e.target.querySelector('div') ? e.target.querySelector('div').innerText : e.target.innerText
+    console.log(tabela)
+    txtSQL.value = `SELECT * FROM ${tabela};`
+}
 const ARRAY_PALAVRAS_CHAVE = [
     'select', 'from', 'where',
     'limit','order', 'by', 'group', 
@@ -71,7 +108,8 @@ const ARRAY_PALAVRAS_CHAVE = [
 
 const formataPalavraChaveSQL = (element) => {        
     ARRAY_PALAVRAS_CHAVE.map(palavra => {
-        const textRegex = `(\\W)${palavra}(\\W)|^${palavra}(\\W)`;
+        // const textRegex = `(\\W)${palavra}(\\W)|^${palavra}(\\W)`;
+        const textRegex = `(\\W)${palavra}(\\W)`;
         const regex = new RegExp(textRegex, 'gi');
         
         if(element.value.search(regex) >= 0) {
@@ -121,6 +159,17 @@ const preencherTabela = ({ colunas, valores }) => {
         })
     })
 }
+const exibeMensagemErro = ({mensagemErro}) => {
+    
+    const body = tabelaResultados.tBodies[0]
+    const linhaBody = body.insertRow()    
+    linhaBody.classList.add('mensagemErro')
+    const celula = linhaBody.insertCell(0)
+    const texto = document.createTextNode(mensagemErro)
+
+    celula.appendChild(texto)
+
+}
 const preencheListaBasesConfiguradas = (bases) => {     
     if(bases.length) {
         const ul = document.createElement('ul')   
@@ -135,12 +184,16 @@ const preencheListaBasesConfiguradas = (bases) => {
             const divCabecalho = document.createElement('div')
             const divIconRadio = document.createElement('div')
             const divTexto = document.createElement('div')
+            const buttonExibeOcultaTabelas = document.createElement('button')
+            const iconButton = document.createElement('i')
             
             radio.type = 'radio'
             radio.id = `listaBases_${indice}`
             radio.name = 'listaBases'
             radio.classList.add('listaBases')
+            li.classList.add('item_base')            
             radio.value = base.id
+            
             radio.addEventListener('change', handleChangeBases)
     
             icon.classList.add('fa')
@@ -148,20 +201,29 @@ const preencheListaBasesConfiguradas = (bases) => {
             divCabecalho.classList.add('cabecalho')
             divIconRadio.classList.add('icon_radio')
             divTexto.classList.add('nome_base')
+            buttonExibeOcultaTabelas.classList.add('expandeListaTabelas')
+            iconButton.classList.add('fa')
+            iconButton.classList.add('fa-eye-slash')
     
+            buttonExibeOcultaTabelas.addEventListener('click', handleClickListaTabelas)
             divTexto.innerText = `${base.dialect.toUpperCase()} - ${base.name.toLowerCase()}`,
             
+            buttonExibeOcultaTabelas.appendChild(iconButton)
             divIconRadio.appendChild(radio)
             divIconRadio.appendChild(icon)
             divCabecalho.appendChild(divIconRadio)
             divCabecalho.appendChild(divTexto)
+            divCabecalho.appendChild(buttonExibeOcultaTabelas)
             li.appendChild(divCabecalho)
-            ul.appendChild(li)
-    
+            
             if(base.tabelas) {
                 preencheTabelasBase(li, base.tabelas)
             }
-    
+            
+            // divCabecalho.addEventListener('click', handleClickListaTabelas)
+            li.addEventListener('click', handleSelectBase)
+            
+            ul.appendChild(li)
         })
 
         listaBasesConfiguradas.appendChild(ul)
@@ -174,12 +236,14 @@ const preencheListaBasesConfiguradas = (bases) => {
 
     
 }
+
 const preencheTabelasBase = (base, tabelas) => {
     if(!tabelas.length)
         return
 
     const ul = document.createElement('ul')
     ul.classList.add('lista_tabelas')
+    ul.classList.add('lista_tabelas_oculta')
 
     tabelas.map(tabela => {
         const li = document.createElement('li')
@@ -191,7 +255,9 @@ const preencheTabelasBase = (base, tabelas) => {
         icon.classList.add('fa-table')
 
         divNome.innerText = tabela
+        li.name = tabela
 
+        li.addEventListener('dblclick', handleDoubleClickTabela)
         li.appendChild(icon)
         li.appendChild(divNome)
         ul.appendChild(li)
