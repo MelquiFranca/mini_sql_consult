@@ -21,7 +21,14 @@ class IPCService {
     }
     criarConexao = (event, data) => {
         JanelaService.createWindowCriarConexao()
-        JanelaService.janelaMain.setEnable(false)
+    }
+    salvarConexao = async (event, data, dataBaseLocal) => {
+        let retorno = await DataBaseService.salvarDataBase({ db: dataBaseLocal.db, dados: data})
+        return retorno
+    }
+    exibeMenuContexto = (tipoMenu=null) => {
+        console.log("EXIBE_MENU_CONTEXTO")
+        JanelaService.createMenuContextoDatabaseLista()
     }
 }
 

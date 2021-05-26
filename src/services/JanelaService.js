@@ -1,4 +1,4 @@
-const { BrowserWindow, nativeImage } = require('electron')
+const { BrowserWindow, nativeImage, Menu } = require('electron')
 const path = require('path')
 const icone = nativeImage.createFromPath(path.join(path.resolve('src','views', 'images', 'icone.png')))
 
@@ -14,7 +14,8 @@ class JanelaService {
             minWidth: 350,
             height: 600,
             minHeight: 500,
-            thickFrame: true,
+            // thickFrame: true,
+            // frame: false,
             backgroundColor: '#333',
             icon: icone,
             darkTheme: true,
@@ -31,7 +32,7 @@ class JanelaService {
         this.#janelaMain.loadFile(path.join('views', 'main.html'))
     }
     static createWindowCriarConexao = (parent) => {
-        if(!this.#janelaCriarConexao) {
+        // if(!this.#janelaCriarConexao) {
 
             this.#janelaCriarConexao = new BrowserWindow({
                 parent,
@@ -55,10 +56,21 @@ class JanelaService {
             // this.#janelaCriarConexao.maximize()
             // this.#janelaCriarConexao.webContents.openDevTools()
             this.#janelaCriarConexao.loadFile(path.join('views', 'nova_conexao.html'))
-        } else {
-            this.#janelaCriarConexao.show()
-        }
+        // } else {
+        //     this.#janelaCriarConexao.show()
+        // }
 
+    }
+
+    static createMenuContextoDatabaseLista = (event, data) => {
+        const template =  [
+            { label: 'Item 1', click: () => console.log('teste 1') },
+            {type: 'separator'},
+            { label: 'Item 2', click: () => console.log('teste 2') }
+        ]
+
+        const menu = Menu.buildFromTemplate(template)
+        menu.popup(this.#janelaMain.fromWebContents(event.sender))
     }
 
     static get janelaMain () {

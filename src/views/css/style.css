@@ -22,7 +22,7 @@ button:active {
 }
 td, th {    
     flex: 1;
-    width: 100%;    
+    /* width: 100%; */
     /* align-items: center; */
     justify-content: center;
 }
@@ -30,13 +30,23 @@ td, th {
 /* SELETORES */
 .body {
     display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
     background: #222;
     color: #FFF;
 }
-#body {
+/* #body {
     overflow: hidden;
+} */
+.barraTitulo {
+    height: 30px;
+    width: 100%;
+    background: #333;
+}
+.corpo {
+    overflow: hidden;
+    flex: 1;
 }
 .conexoes {
     flex: 2;
@@ -142,7 +152,7 @@ li .icon_radio input {
 .botoes_conexoes .botao .descricao {
     background: #555;
 }
-.expandeListaTabelas {
+.expandeListaTabelas, .editaDatabase {
     display: flex;
     border: none;
     color: #FFF;
@@ -299,6 +309,9 @@ li .icon_radio input {
     white-space:nowrap;
     padding: 4px;
 }
+.headResultado th {
+    width: 100%;
+}
 .mensagemErro {
     justify-content: center;
     align-items: center;
@@ -375,7 +388,7 @@ RESPONSIVIDADE
 */
 
 @media screen and (max-width: 900px) {
-    #body {
+    #corpo {
         flex-direction: column;
     }
     .atividades {

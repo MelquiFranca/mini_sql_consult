@@ -7,8 +7,36 @@ class DataBaseService {
     static removeDataBase = (database, id) => {
 
     }
-    static salvarDataBase = ({ db }) => {
-        
+    static salvarDataBase = async ({ db, dados }) => {
+        try {
+            const { dialect, name, database, host, port, user, password } = dados
+            
+            if(!name || !host || !dialect) throw new Error('Campo inválido.')
+
+            const validaConexao = await this.getTabelasBase(dados)        
+
+            if(validaConexao?.error)  throw new Error('Não foi possível conectar a base de dados.')
+
+            const result = await db.query(`INSERT INTO Bases
+                (name, host, user, dialect, password, port, database) 
+                VALUES (
+                    '${name}',
+                    '${host}',
+                    '${user}',
+                    '${dialect}',
+                    '${password}',
+                    '${port}',
+                    '${database}'
+                );`
+            )
+
+        } catch(error) {
+            console.error("DataBaseService.salvarDataBase(): ", error.message)
+            return {
+                error: true,
+                mensagemErro: error.message
+            }
+        }
     }
     static criarDataBaseLocal = () => {
 

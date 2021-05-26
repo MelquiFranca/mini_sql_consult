@@ -94,8 +94,7 @@ const handleSelectBase = ({target}) => {
 const handleDoubleClickTabela = (e) => {
     e.stopPropagation()
     handleSelectBase(e.target.parentNode)
-    const tabela = e.target.querySelector('div') ? e.target.querySelector('div').innerText : e.target.innerText
-    console.log(tabela)
+    const tabela = e?.target.querySelector('div') ? e.target.querySelector('div').innerText : e.target.innerText
     txtSQL.value = `SELECT * FROM ${tabela};`
 }
 const ARRAY_PALAVRAS_CHAVE = [
@@ -108,8 +107,8 @@ const ARRAY_PALAVRAS_CHAVE = [
 
 const formataPalavraChaveSQL = (element) => {        
     ARRAY_PALAVRAS_CHAVE.map(palavra => {
-        // const textRegex = `(\\W)${palavra}(\\W)|^${palavra}(\\W)`;
-        const textRegex = `(\\W)${palavra}(\\W)`;
+        const textRegex = `(\\W)${palavra}(\\W)|^${palavra}(\\W)`;
+        // const textRegex = `(\\W)${palavra}(\\W)`;
         const regex = new RegExp(textRegex, 'gi');
         
         if(element.value.search(regex) >= 0) {
@@ -185,7 +184,9 @@ const preencheListaBasesConfiguradas = (bases) => {
             const divIconRadio = document.createElement('div')
             const divTexto = document.createElement('div')
             const buttonExibeOcultaTabelas = document.createElement('button')
-            const iconButton = document.createElement('i')
+            const iconButtonExibe = document.createElement('i')
+            const buttonEdita = document.createElement('button')
+            const iconButtonEdita = document.createElement('i')
             
             radio.type = 'radio'
             radio.id = `listaBases_${indice}`
@@ -200,27 +201,32 @@ const preencheListaBasesConfiguradas = (bases) => {
             icon.classList.add('fa-database')
             divCabecalho.classList.add('cabecalho')
             divIconRadio.classList.add('icon_radio')
-            divTexto.classList.add('nome_base')
-            buttonExibeOcultaTabelas.classList.add('expandeListaTabelas')
-            iconButton.classList.add('fa')
-            iconButton.classList.add('fa-eye-slash')
+            divTexto.classList.add('nome_base')            
+            buttonEdita.classList.add('editaDatabase')            
+            iconButtonEdita.classList.add('fa')
+            iconButtonEdita.classList.add('fa-pencil')
     
-            buttonExibeOcultaTabelas.addEventListener('click', handleClickListaTabelas)
+            buttonEdita.addEventListener('click', ()=>{})
             divTexto.innerText = `${base.dialect.toUpperCase()} - ${base.name.toLowerCase()}`,
             
-            buttonExibeOcultaTabelas.appendChild(iconButton)
+            buttonEdita.appendChild(iconButtonEdita)
             divIconRadio.appendChild(radio)
             divIconRadio.appendChild(icon)
             divCabecalho.appendChild(divIconRadio)
             divCabecalho.appendChild(divTexto)
-            divCabecalho.appendChild(buttonExibeOcultaTabelas)
+            divCabecalho.appendChild(buttonEdita)
             li.appendChild(divCabecalho)
             
-            if(base.tabelas) {
+            if(base.tabelas.length) {
+                iconButtonExibe.classList.add('fa')
+                iconButtonExibe.classList.add('fa-eye-slash')
+                buttonExibeOcultaTabelas.classList.add('expandeListaTabelas')
+                buttonExibeOcultaTabelas.addEventListener('click', handleClickListaTabelas)
+                buttonExibeOcultaTabelas.appendChild(iconButtonExibe)
+                divCabecalho.appendChild(buttonExibeOcultaTabelas)
                 preencheTabelasBase(li, base.tabelas)
             }
             
-            // divCabecalho.addEventListener('click', handleClickListaTabelas)
             li.addEventListener('click', handleSelectBase)
             
             ul.appendChild(li)
@@ -273,21 +279,6 @@ btnUltimaConsulta.addEventListener('click', handleClickUltimaConsulta)
 btnCancelar.addEventListener('click', handleClickCancelar)
 btnNovaConexao.addEventListener('click', handleClickNovaConexao)
 txtSQL.addEventListener('keyup', handleChangeTextoSQL)
-
-
-// const basesTESTE = [
-//     {
-//         name: 'Database 1',
-//         tabelas: [
-//             'campeonatos',
-//             'jogadores',
-//             'times',
-//             'tecnicos'
-//         ]
-//     },
-//     {
-//         name: 'Database 2',
-//         tabelas: ['filmes']
-//     },
-// ]
-// preencheListaBasesConfiguradas(basesTESTE, handleChangeBases)
+// window.addEventListener('contextmenu', (e) => {
+//     ipcRenderer.invoke('ExibeMenuContexto')
+// })

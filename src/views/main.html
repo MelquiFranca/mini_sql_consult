@@ -7,102 +7,105 @@
         <link href="css/style.css" rel="stylesheet">        
     </head>
     <body id="body" class="body">
-        <section id="conexoes" class="conexoes">
-            <div class="header_bloco">
-                <i class="fa fa-sitemap"></i>
-                CONEXÕES
-            </div>
-            <div class="conexoes_body">
-                <div class="databases" id="databases">                   
-                    <!-- <ul name="basesConfiguradas" id="basesConfiguradas" class="basesConfiguradas">
-                        <li class="base_selecionada">
-                            <div class="cabecalho">
-                                <div class="icon_radio">
-                                    <input type="radio" name="" id="">
-                                    <i class="fa fa-database"></i>
+        <!-- <div class="barraTitulo" id="barraTitulo"></div> -->
+        <div class="corpo" id="corpo">
+            <section id="conexoes" class="conexoes">
+                <div class="header_bloco">
+                    <i class="fa fa-sitemap"></i>
+                    CONEXÕES
+                </div>
+                <div class="conexoes_body">
+                    <div class="databases" id="databases">                   
+                        <!-- <ul name="basesConfiguradas" id="basesConfiguradas" class="basesConfiguradas">
+                            <li class="base_selecionada">
+                                <div class="cabecalho">
+                                    <div class="icon_radio">
+                                        <input type="radio" name="" id="">
+                                        <i class="fa fa-database"></i>
+                                    </div>
+                                    <div class="nome_base">ECidade_Niteroi_20210219</div>
                                 </div>
-                                <div class="nome_base">ECidade_Niteroi_20210219</div>
-                            </div>
-                            <ul class="lista_tabelas">
-                                <li class="tabela">
-                                    <i class="fa fa-table"></i>
-                                    <div>Tabela</div>
-                                </li>
-                                <li class="tabela">
-                                    <i class="fa fa-table"></i>
-                                    Tabela
-                                </li>
-                            </ul>
-                        </li>
-                        
-                    </ul> -->
-                </div>
-                <div class="acoes_conexoes">
-                    <div class="botoes_conexoes">
-                        <button class="botao" id="novaConexao">
-                            <div class="icon estilo_icon_tipo_yellow">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <div class="descricao">Nova conexão</div>
-                        </button>
+                                <ul class="lista_tabelas">
+                                    <li class="tabela">
+                                        <i class="fa fa-table"></i>
+                                        <div>Tabela</div>
+                                    </li>
+                                    <li class="tabela">
+                                        <i class="fa fa-table"></i>
+                                        Tabela
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                        </ul> -->
+                    </div>
+                    <div class="acoes_conexoes">
+                        <div class="botoes_conexoes">
+                            <button class="botao" id="novaConexao">
+                                <div class="icon estilo_icon_tipo_yellow">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="descricao">Nova conexão</div>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <section id="atividades" class="atividades">
-            <div id="consultas" class="consultas">
+            </section>
+            
+            <section id="atividades" class="atividades">
+                <div id="consultas" class="consultas">
+                    <div class="header_bloco">
+                        <i class="fa fa-pencil"></i>
+                        SCRIPTS SQL
+                    </div>
+                    <textarea name="txtSql" id="txtSql" class="txtSql" cols="30" rows="10" placeholder="Insira aqui seu SCRIPT SQL..."></textarea>
+                </div>
+                <div id="resultados" class="resultados">
+                    <div class="header_bloco">
+                        <i class="fa fa-desktop"></i>                    
+                        RESULTADOS
+                        <div class="countResultado" id="countResultado"></div>
+                    </div>
+                    <div class="gridResultado" id="gridResultado">
+                        <table id="tabelaResultados">
+                            <tbody class="bodyResultado" id="bodyResultado">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="acoes" class="acoes">
                 <div class="header_bloco">
-                    <i class="fa fa-pencil"></i>
-                    SCRIPTS SQL
+                    <i class="fa fa-bolt"></i>                    
+                    AÇÕES
                 </div>
-                <textarea name="txtSql" id="txtSql" class="txtSql" cols="30" rows="10" placeholder="Insira aqui seu SCRIPT SQL..."></textarea>
-            </div>
-            <div id="resultados" class="resultados">
-                <div class="header_bloco">
-                    <i class="fa fa-desktop"></i>                    
-                    RESULTADOS
-                    <div class="countResultado" id="countResultado"></div>
+                <div class="botoes">
+                    <button class="botao" id="executar">
+                        <div class="icon estilo_icon_tipo_green">
+                            <i class="fa fa-play"></i>
+                        </div>
+                        <div class="descricao">Executar</div>
+                    </button>
+                    <button class="botao" id="refreshUltimaConsulta">
+                        <div class="icon estilo_icon_tipo_blue">
+                            <i class="fa fa-refresh"></i>
+                        </div>
+                        <div class="descricao">Última Consulta</div>
+                    </button>
+                    <button class="botao" id="cancelar">
+                        <div class="icon estilo_icon_tipo_red">
+                            <i class="fa fa-stop"></i>
+                        </div>
+                        <div class="descricao">Cancelar</div>
+                    </button>
+                    <!-- <button class="botao">
+                        <div class="icon estilo_icon_tipo_yellow">E</div>
+                        <div class="descricao">Criar</div>
+                    </button> -->
                 </div>
-                <div class="gridResultado" id="gridResultado">
-                    <table id="tabelaResultados">
-                        <tbody class="bodyResultado" id="bodyResultado">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-        
-        <section id="acoes" class="acoes">
-            <div class="header_bloco">
-                <i class="fa fa-bolt"></i>                    
-                AÇÕES
-            </div>
-            <div class="botoes">
-                <button class="botao" id="executar">
-                    <div class="icon estilo_icon_tipo_green">
-                        <i class="fa fa-play"></i>
-                    </div>
-                    <div class="descricao">Executar</div>
-                </button>
-                <button class="botao" id="refreshUltimaConsulta">
-                    <div class="icon estilo_icon_tipo_blue">
-                        <i class="fa fa-refresh"></i>
-                    </div>
-                    <div class="descricao">Última Consulta</div>
-                </button>
-                <button class="botao" id="cancelar">
-                    <div class="icon estilo_icon_tipo_red">
-                        <i class="fa fa-stop"></i>
-                    </div>
-                    <div class="descricao">Cancelar</div>
-                </button>
-                <!-- <button class="botao">
-                    <div class="icon estilo_icon_tipo_yellow">E</div>
-                    <div class="descricao">Criar</div>
-                </button> -->
-            </div>
-        </section>
+            </section>
+        </div>
         <script src="main.js"></script>
     </body>
 </html>

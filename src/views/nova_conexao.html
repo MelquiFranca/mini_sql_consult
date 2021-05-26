@@ -15,12 +15,12 @@
                 CONFIGURAR NOVA CONEXÃO
             </div>
         </section>
-        <form class="formulario">
+        <div class="formulario">
             <div class="form_group">
                 <label for="" class="form_label">
                     Tipo de Banco:
                 </label>
-                <select name="" id="" class="form_input">
+                <select name="tipo_banco" id="tipo_banco" class="form_input">
                     <option value="">Selecione...</option>
                     <option value="sqlite">SQLite</option>
                     <option value="mysql">MySQL</option>
@@ -30,23 +30,23 @@
             </div>
             <div class="form_group">
                 <label for="" class="form_label">
-                    Nome da Base:
+                    Endereço do Host:
                 </label>
                 <input 
-                    type="text" 
-                    name="" 
-                    id="" 
-                    class="form_input"
+                type="text" 
+                name="host" 
+                id="host" 
+                class="form_input"
                 />
             </div>
             <div class="form_group">
                 <label for="" class="form_label">
-                    Endereço do Host:
+                    Nome da Base:
                 </label>
                 <input 
                     type="text" 
-                    name="" 
-                    id="" 
+                    name="nome_database" 
+                    id="nome_database" 
                     class="form_input"
                 />
             </div>
@@ -56,8 +56,8 @@
                 </label>
                 <input 
                     type="text" 
-                    name="" 
-                    id="" 
+                    name="database" 
+                    id="database" 
                     class="form_input"
                 />
             </div>
@@ -67,8 +67,8 @@
                 </label>
                 <input 
                     type="text" 
-                    name="" 
-                    id="" 
+                    name="porta" 
+                    id="porta" 
                     class="form_input"
                 />
             </div>
@@ -78,8 +78,8 @@
                 </label>
                 <input 
                     type="text" 
-                    name="" 
-                    id="" 
+                    name="usuario" 
+                    id="usuario" 
                     class="form_input"
                 />
             </div>
@@ -89,28 +89,28 @@
                 </label>
                 <input 
                     type="text" 
-                    name="" 
-                    id="" 
+                    name="senha" 
+                    id="senha" 
                     class="form_input"
                 />
             </div>
 
             <div class="botoes">
-                <button class="botao" id="executar">
+                <button class="botao" id="salvar">
                     <div class="icon estilo_icon_tipo_green">
                         <i class="fa fa-play"></i>
                     </div>
                     <div class="descricao">Salvar Conexão</div>
                 </button>
-                <button class="botao" id="executar">
+                <button class="botao" id="limpar">
                     <div class="icon estilo_icon_tipo_red">
-                        <i class="fa fa-play"></i>
+                        <i class="fa fa-stop"></i>
                     </div>
-                    <div class="descricao">Cancelar</div>
+                    <div class="descricao">Limpar</div>
                 </button>
             </div>
-        </form>
+        </div>
     </body>
-    <script src="scripts.js"></script>
+    <script src="nova_conexao.js"></script>
 </body>
 </html>
